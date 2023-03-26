@@ -1,0 +1,1 @@
+INSERT INTO category(id, code, description) VALUES (1, 'TRAVELS', 'Travels');
