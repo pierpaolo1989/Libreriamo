@@ -1,134 +1,78 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
-  <title>Libreriamo</title>
-
+  <meta charset="UTF-8">
+  <title>Lista Libri</title>
+  <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" rel="stylesheet">
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
   <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
   <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
-
 <body>
-  <div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/header :: header"></div>
 
-  <div class="container-fluid col-lg-8 col-lg-offset-2">
-    <h2 class="text-center" style="margin-top:3%;">Libreriamo</h2>
+<div class="container-fluid col-lg-8 col-lg-offset-2">
+  <h2 class="text-center" style="margin-top:3%;">Libreriamo</h2>
 
-    <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
-      role="alert">
-      [[${message}]]
-      <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-
-    <div class="my-3">
-      <form th:action="@{/books}">
-        <div class="row d-flex">
-          <div class="col-md-6 mt-2">
-            <div class="search">
-              <i class="fa fa-search"></i>
-              <input id="keyword" type="search" name="keyword" th:value="${keyword}" required class="form-control"
-                placeholder="Enter keyword">
-              <button type="submit" class="btn btn-secondary">Search</button>
-            </div>
-          </div>
-          <div class="col-md-6 mt-2">
-            <button id="btnClear" class="btn btn-info">Clear</button>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <div th:if="${books.size() > 0}">
-      <table class="table table-hover table-responsive-xl">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Publisher</th>
-            <th scope="col">Year</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="book : ${books}">
-            <th scope="row">[[${book.id}]]</th>
-            <td>[[${book.title}]]</td>
-            <td>[[${book.author}]]</td>
-            <td>[[${book.publisher}]]</td>
-            <td>
-            [[${book.year}]]
-            </td>
-            <td>
-              <a th:href="@{'/books/' + ${book.id}}" title="Edit this tutorial"
-                class="fa-regular fa-pen-to-square icon-dark"></a>
-              &nbsp;
-              <a th:href="@{'/books/delete/' + ${book.id}}" th:bookId="${book.id}" id="btnDelete"
-                title="Delete this tutorial" class="fa-regular fa-trash-can icon-dark btn-delete"></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="" th:unless="${books.size() > 0}">
-      <span>No books found!</span>
-    </div>
+  <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
+       role="alert">
+    [[${message}]]
+    <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 
-  <div class="modal fade text-center" id="confirmModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Delete Confirmation</h5>
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <div class="my-3">
+    <form th:action="@{/books}">
+      <div class="row d-flex">
+        <div class="col-md-6 mt-2">
+          <div class="search">
+            <i class="fa fa-search"></i>
+            <input id="keyword" type="search" name="keyword" th:value="${keyword}" required class="form-control"
+                   placeholder="Enter keyword">
+            <button type="submit" class="btn btn-secondary">Search</button>
+          </div>
         </div>
-
-        <div class="modal-body">
-          <span id="confirmText"></span>
-        </div>
-
-        <div class="modal-footer">
-          <a type="button" id="yesBtn" class="btn btn-danger">Yes</a>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <div class="col-md-6 mt-2">
+          <button id="btnClear" class="btn btn-info">Clear</button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
+<table id="bookTable" class="display">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Titolo</th>
+    <th>Autore</th>
+    <th>Anno</th>
+    <th>Azioni</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="book : ${books}">
+    <td>[[${book.title}]]</td>
+    <td>[[${book.author}]]</td>
+    <td>[[${book.publisher}]]</td>
+    <td>
+      [[${book.year}]]
+    <td>
+      <a th:href="@{/books/edit/{id}(id=${book.id})}">Modifica</a>
+      <a th:href="@{/books/delete/{id}(id=${book.id})}">Elimina</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
-  <div th:replace="fragments/footer :: footer"></div>
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $(".btn-delete").on("click", function (e) {
-        e.preventDefault();
-        link = $(this);
-
-        bookTitle = link.attr("bookId");
-        $("#yesBtn").attr("href", link.attr("href"));
-        $("#confirmText").html("Do you want to delete the Book with ID \<strong\>" + bookTitle + "\<\/strong\>?");
-        $("#confirmModal").modal();
-      });
-
-      $("#btnClear").on("click", function (e) {
-        e.preventDefault();
-        $("#keyword").text("");
-        window.location = "[[@{/books}]]";
-      });
-    });
-  </script>
-
+<script>
+  $(document).ready(function() {
+      $('#bookTable').DataTable();
+  });
+</script>
 </body>
-
 </html>
