@@ -17,7 +17,11 @@ public class DatabaseConfiguration {
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadData() {
-        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false, "UTF-8", new ClassPathResource("data.sql"));
-        resourceDatabasePopulator.execute(dataSource);
+        try {
+            ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false, "UTF-8", new ClassPathResource("data.sql"));
+            resourceDatabasePopulator.execute(dataSource);
+        } catch (Exception e) {
+            System.out.println("roing");
+        }
     }
 }

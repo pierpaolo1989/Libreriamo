@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Lista Libri</title>
-  <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" rel="stylesheet">
-  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
   <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -12,12 +10,13 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
   <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" rel="stylesheet">
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
+<nav th:replace="fragments/_header :: header"></nav>
 
 <div class="container-fluid col-lg-8 col-lg-offset-2">
-  <h2 class="text-center" style="margin-top:3%;">Libreriamo</h2>
 
   <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
        role="alert">
@@ -33,7 +32,7 @@
         <div class="col-md-6 mt-2">
           <div class="search">
             <i class="fa fa-search"></i>
-            <input id="keyword" type="search" name="keyword" th:value="${keyword}" required class="form-control"
+            <input id="keyword" type="search" name="keyword" th:value="${keyword}" class="form-control"
                    placeholder="Enter keyword">
             <button type="submit" class="btn btn-secondary">Search</button>
           </div>
@@ -44,8 +43,8 @@
       </div>
     </form>
   </div>
-<table id="bookTable" class="display">
-  <thead>
+  <table class="table table-hover table-responsive-xl" id="bookTable">
+    <thead class="thead-light">
   <tr>
     <th>ID</th>
     <th>Titolo</th>

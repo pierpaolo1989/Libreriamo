@@ -8,7 +8,7 @@ Un'applicazione **Spring Boot** con **Maven** e **Thymeleaf** per gestire una li
 - **Java 17+**
 - **Spring Boot** (Web, JPA, Thymeleaf)
 - **Maven** (gestione delle dipendenze)
-- **H2 Database** (o MySQL configurabile)
+- **PostgreSQL Database** (o MySQL configurabile)
 - **Thymeleaf** (template engine per la vista)
 
 ## 📦 Setup del Progetto
