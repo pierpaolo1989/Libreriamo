@@ -1,72 +1,65 @@
-📚 Libreria Domestica
 
-Un'applicazione Spring Boot con Maven e Thymeleaf per gestire una libreria domestica. Permette di aggiungere, modificare, eliminare e visualizzare i libri presenti nella tua collezione personale.
+# 📚 Libreria Domestica
 
-🛠️ Tecnologie Utilizzate
+Un'applicazione **Spring Boot** con **Maven** e **Thymeleaf** per gestire una libreria domestica. Permette di aggiungere, modificare, eliminare e visualizzare i libri presenti nella tua collezione personale.
 
-Java 17+
+## 🛠️ Tecnologie Utilizzate
 
-Spring Boot (Web, JPA, Thymeleaf)
+- **Java 17+**
+- **Spring Boot** (Web, JPA, Thymeleaf)
+- **Maven** (gestione delle dipendenze)
+- **H2 Database** (o MySQL configurabile)
+- **Thymeleaf** (template engine per la vista)
 
-Maven (gestione delle dipendenze)
+## 📦 Setup del Progetto
 
-H2 Database (o MySQL configurabile)
-
-Thymeleaf (template engine per la vista)
-
-📦 Setup del Progetto
-
-Prerequisiti
+### Prerequisiti
 
 Assicurati di avere installati:
 
-Java 17+
+- **Java 17+**
+- **Maven**
 
-Maven
+### Clonare il Repository
 
-Clonare il Repository
-
+```bash
 git clone <URL_DEL_REPO>
 cd nome-del-progetto
+```
 
-Configurazione
+### Configurazione
 
-Puoi configurare il database in src/main/resources/application.properties.
+Puoi configurare il database in `src/main/resources/application.properties`.
 
-Esempio di configurazione H2 (predefinito):
+Esempio di configurazione PostgreSQL (predefinito):
 
-spring.datasource.url=jdbc:h2:mem:libreria
-spring.datasource.driver-class-name=org.h2.Driver
-spring.datasource.username=sa
-spring.datasource.password=
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-
-Per utilizzare MySQL:
-
+```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/libreria
 spring.datasource.username=tuo-username
 spring.datasource.password=tuo-password
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+```
 
-Esecuzione del Progetto
+### Esecuzione del Progetto
 
 Per eseguire l'applicazione:
 
+```bash
 mvn spring-boot:run
+```
 
-L'applicazione sarà disponibile su: http://localhost:8080
+L'applicazione sarà disponibile su: [http://localhost:9191](http://localhost:9191)
 
-📚 Funzionalità
+## 📚 Funzionalità
 
-📖 Gestione Libri: Aggiungi, visualizza, modifica ed elimina libri.
+- 📖 **Gestione Libri**: Aggiungi, visualizza, modifica ed elimina libri.
+- 🔍 **Ricerca**: Cerca libri per titolo, autore o genere.
+- 🏷️ **Categorie**: Organizza i libri in categorie.
 
-🔍 Ricerca: Cerca libri per titolo, autore o genere.
+## 📂 Struttura del Progetto
 
-🏷️ Categorie: Organizza i libri in categorie.
-
-📂 Struttura del Progetto
-
+```
 ├── src
 │   ├── main
 │   │   ├── java
@@ -80,17 +73,32 @@ L'applicazione sarà disponibile su: http://localhost:8080
 │   │       ├── templates
 │   │       └── application.properties
 └── pom.xml
+```
 
+## 📊 Esempio di Endpoints
 
-🧪 Test
+| Metodo | Endpoint          | Descrizione              |
+|--------|-------------------|--------------------------|
+| GET    | `/`               | Home Page               |
+| GET    | `/libri`          | Lista di tutti i libri  |
+| GET    | `/libri/{id}`     | Dettaglio di un libro   |
+| GET    | `/libri/nuovo`    | Form per nuovo libro    |
+| POST   | `/libri`          | Salva un nuovo libro    |
+| GET    | `/libri/modifica/{id}` | Modifica un libro      |
+| POST   | `/libri/elimina/{id}`  | Elimina un libro       |
+
+## 🧪 Test
 
 Puoi eseguire i test con:
 
+```bash
 mvn test
+```
 
-📄 Licenza
+## 📄 Licenza
 
-Questo progetto è distribuito sotto la licenza MIT.
+Questo progetto è distribuito sotto la licenza **MIT**.
 
-👨‍💻 Autore: Pierpaolo Di Dato
+---
 
+👨‍💻 **Autore:** [Pierpaolo Di Dato](https://github.com/pierpaolo1989)
